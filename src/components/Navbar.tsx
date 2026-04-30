@@ -7,6 +7,7 @@ interface SearchResult {
   title: string;
   sub: string;
   rating?: number;
+  image?: string;
 }
 
 interface NavbarProps {
@@ -104,20 +105,26 @@ export default function Navbar({
                       onClick={() => pick(r)}
                       className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 transition-colors cursor-pointer text-left"
                     >
-                      {/* Icon */}
-                      <div
-                        className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${
-                          r.type === "cast"
-                            ? "bg-gradient-to-br from-[#C41E3A] to-[#1B2A4A]"
-                            : "bg-[#1B2A4A]/60"
-                        }`}
-                      >
-                        {r.type === "cast" ? (
-                          <User className="w-3.5 h-3.5 text-white" />
-                        ) : (
-                          <Play className="w-3.5 h-3.5 text-white" />
-                        )}
-                      </div>
+                      {/* Icon / Image */}
+                      {r.image && r.image.trim() !== "" ? (
+                        <div className="w-8 h-8 rounded overflow-hidden shrink-0">
+                          <img src={r.image} alt="" className="w-full h-full object-cover" />
+                        </div>
+                      ) : (
+                        <div
+                          className={`w-8 h-8 rounded flex items-center justify-center shrink-0 ${
+                            r.type === "cast"
+                              ? "bg-gradient-to-br from-[#C41E3A] to-[#1B2A4A]"
+                              : "bg-[#1B2A4A]/60"
+                          }`}
+                        >
+                          {r.type === "cast" ? (
+                            <User className="w-3.5 h-3.5 text-white" />
+                          ) : (
+                            <Play className="w-3.5 h-3.5 text-white" />
+                          )}
+                        </div>
+                      )}
 
                       {/* Info */}
                       <div className="flex-1 min-w-0">
