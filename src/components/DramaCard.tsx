@@ -8,20 +8,30 @@ interface Props {
 }
 
 export default function DramaCard({ drama, onClick }: Props) {
+  const hasImage = drama.image && drama.image.trim() !== "";
+
   return (
     <button
       onClick={onClick}
       className="group text-left w-full bg-[#0F0F0F] border border-white/5 rounded-md overflow-hidden hover:border-[#D4AF37]/25 transition-all duration-200 cursor-pointer"
     >
-      {/* Poster placeholder */}
+      {/* Poster */}
       <div className="relative aspect-[3/4] overflow-hidden">
-        <div className={`absolute inset-0 bg-gradient-to-br ${drama.color}`} />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent" />
-
-        {/* Decorative ring */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-20">
-          <div className="w-20 h-20 border border-white/30 rounded-full" />
-        </div>
+        {hasImage ? (
+          <img
+            src={drama.image}
+            alt={drama.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <>
+            <div className={`absolute inset-0 bg-gradient-to-br ${drama.color}`} />
+            <div className="absolute inset-0 flex items-center justify-center opacity-20">
+              <div className="w-20 h-20 border border-white/30 rounded-full" />
+            </div>
+          </>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-[#0F0F0F]/20 to-transparent" />
 
         {/* Type badge */}
         <span className="absolute top-2.5 left-2.5 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase bg-[#C41E3A] text-white rounded-sm">
