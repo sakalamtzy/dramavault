@@ -47,8 +47,8 @@ export const castMembers: CastMember[] = [
     nationality: "Chinese",
     birthdate: "December 13, 2000",
     gender: "Female",
-    description: "Write a short biography about this person...",
-    photo: "", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
+    description: "Li Keyi, a Chinese actress. Born on December 13, 2000 in Luoyang, Henan, Sagittarius. Graduated from the Beijing Institute of Fashion Technology in China. She signed with Heard Island (听花岛) and officially began her vertical drama acting career.",
+    photo: "https://image.tmdb.org/t/p/original/jG9115Hmq6XwXDKbQeuQsrou41v.jpg", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
   },
 ];
 
@@ -58,25 +58,25 @@ export const dramas: Drama[] = [
   // ────── COPY & PASTE THIS TEMPLATE ──────
   // {
   //   id: 1,
-  //   title: "Drama Title",
-  //   type: "TV Series",            // "Movie" | "TV Series" | "Short Play"
-  //   year: 2024,
-  //   country: "South Korea",
+  //   title: "Wrapped the Playboy Around My Finger",
+  //   type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
+  //   year: 2025,
+  //   country: "China",
   //   genres: ["Romance", "Comedy"],
-  //   rating: 8.5,                  // 1.0 to 10.0
+  //   rating: 8.3,                  // 1.0 to 10.0
   //   ratingCount: 12000,
-  //   synopsis: "Write your synopsis here...",
-  //   castIds: [],                  // e.g. [1, 2] to link to cast members
-  //   episodes: 16,
+  //   synopsis: "To reclaim her mother’s company, Shen Qing Ci transforms herself from a mysterious assassin into a seemingly aloof and innocent “white flower.” According to the agreement, she enters a flash marriage with Xi Xing Ye. At their first meeting, Xi Xing Ye is stunned by Shen Qing Ci’s delicate appearance, and as they spend more time together, he falls ever deeper for the mysterious and powerful woman behind the façade.",
+  //   castIds: [1],                  // e.g. [1, 2] to link to cast members
+  //   episodes: 69,
   //   status: "Completed",          // "Completed" | "Airing"
   //   color: "from-red-900 via-rose-800 to-red-950",
-  //   image: "",                    // poster image URL
+  //   image: "https://image.tmdb.org/t/p/w1280/17M32lvVjkxf6SV5UWg0hepkCNc.jpg",                    // poster image URL
   //   videoEpisodes: [
   //     {
   //       number: 1,
   //       title: "Episode 1",
-  //       videoUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
-  //       duration: "1:05:30",
+  //       videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
+  //       duration: "1:43:15",
   //     },
   //   ],
   // },
