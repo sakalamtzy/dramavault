@@ -73,9 +73,9 @@ export const dramas: Drama[] = [
     videoEpisodes: [
     {
       number: 1,
-      title: "Episode 1",
-      videoUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
-      duration: "1:05:30",
+      title: "Full Episode",
+      videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
+      duration: "1:43:15",
     },
   ],
   },
