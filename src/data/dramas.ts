@@ -74,7 +74,7 @@ export const dramas: Drama[] = [
     {
       number: 1,
       title: "Full Episode",
-      videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
+      videoUrl: "https://flickreels.dramafren.org/index.php?page=watch&id=2508&ep=1&lang=en",
       duration: "1:43:15",
     },
   ],
