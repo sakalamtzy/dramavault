@@ -56,30 +56,30 @@ export const castMembers: CastMember[] = [
 // ⚠️ Add at least one drama with castIds: [1] so Li Keyi shows up!
 export const dramas: Drama[] = [
   // ────── COPY & PASTE THIS TEMPLATE ──────
-  // {
-  //   id: 1,
-  //   title: "Wrapped the Playboy Around My Finger",
-  //   type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
-  //   year: 2025,
-  //   country: "China",
-  //   genres: ["Romance", "Comedy"],
-  //   rating: 8.3,                  // 1.0 to 10.0
-  //   ratingCount: 12000,
-  //   synopsis: "To reclaim her mother’s company, Shen Qing Ci transforms herself from a mysterious assassin into a seemingly aloof and innocent “white flower.” According to the agreement, she enters a flash marriage with Xi Xing Ye. At their first meeting, Xi Xing Ye is stunned by Shen Qing Ci’s delicate appearance, and as they spend more time together, he falls ever deeper for the mysterious and powerful woman behind the façade.",
-  //   castIds: [1],                  // e.g. [1, 2] to link to cast members
-  //   episodes: 69,
-  //   status: "Completed",          // "Completed" | "Airing"
-  //   color: "from-red-900 via-rose-800 to-red-950",
-  //   image: "https://image.tmdb.org/t/p/w1280/17M32lvVjkxf6SV5UWg0hepkCNc.jpg",                    // poster image URL
-  //   videoEpisodes: [
-  //     {
-  //       number: 1,
-  //       title: "Episode 1",
-  //       videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
-  //       duration: "1:43:15",
-  //     },
-  //   ],
-  // },
+  {
+    id: 1,
+    title: "Wrapped the Playboy Around My Finger",
+    type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
+    year: 2025,
+    country: "China",
+    genres: ["Romance", "Comedy"],
+    rating: 8.3,                  // 1.0 to 10.0
+    ratingCount: 12000,
+    synopsis: "To reclaim her mother’s company, Shen Qing Ci transforms herself from a mysterious assassin into a seemingly aloof and innocent “white flower.” According to the agreement, she enters a flash marriage with Xi Xing Ye. At their first meeting, Xi Xing Ye is stunned by Shen Qing Ci’s delicate appearance, and as they spend more time together, he falls ever deeper for the mysterious and powerful woman behind the façade.",
+    castIds: [1],                  // e.g. [1, 2] to link to cast members
+    episodes: 69,
+    status: "Completed",          // "Completed" | "Airing"
+    color: "from-red-900 via-rose-800 to-red-950",
+    image: "https://image.tmdb.org/t/p/w1280/17M32lvVjkxf6SV5UWg0hepkCNc.jpg",                    // poster image URL
+    videoEpisodes: [
+    {
+      number: 1,
+      title: "Episode 1",
+      videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
+      duration: "1:43:15",
+    },
+  ],
+  },
   // ─────────────────────────────────────────
 ];
 
