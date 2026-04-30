@@ -78,6 +78,12 @@ export const dramas: Drama[] = [
       videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
       duration: "1:43:15",
     },
+    {
+      number: 2,
+      title: "Episode 2",
+      videoUrl: "https://flickreels.dramafren.org/f94a367f-b53e-4c78-8fcf-1d9a7e5ff5df",
+      duration: "1:00:00",
+    },
   ],
   },
   // ─────────────────────────────────────────
