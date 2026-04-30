@@ -78,6 +78,7 @@ export default function App() {
       title: string;
       sub: string;
       rating?: number;
+      image?: string;
     }[] = [];
 
     // Cast matches
@@ -92,6 +93,7 @@ export default function App() {
           id: c.id,
           title: c.name,
           sub: `${c.nationality} · ${works.length} works`,
+          image: c.photo || undefined,
         });
       }
     });
@@ -112,6 +114,7 @@ export default function App() {
           title: d.title,
           sub: `${d.type} · ${d.country} · ${d.year}`,
           rating: d.rating,
+          image: d.image || undefined,
         });
       }
     });
@@ -292,8 +295,14 @@ export default function App() {
                     className="group text-left w-full bg-[#0F0F0F] border border-white/5 rounded-md overflow-hidden hover:border-[#D4AF37]/25 transition-all cursor-pointer"
                   >
                     <div className="p-4 flex flex-col items-center text-center">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#C41E3A] to-[#1B2A4A] flex items-center justify-center border border-[#D4AF37]/20 mb-3">
-                        <User className="w-6 h-6 text-white" />
+                      <div className="w-16 h-16 rounded-full border border-[#D4AF37]/20 mb-3 overflow-hidden">
+                        {member.photo && member.photo.trim() !== "" ? (
+                          <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-[#C41E3A] to-[#1B2A4A] flex items-center justify-center">
+                            <User className="w-6 h-6 text-white" />
+                          </div>
+                        )}
                       </div>
                       <h3 className="text-white text-sm font-medium group-hover:text-[#D4AF37] transition-colors truncate w-full">
                         {member.name}
