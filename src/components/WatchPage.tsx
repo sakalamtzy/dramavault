@@ -255,9 +255,15 @@ export default function WatchPage({
               <div className="flex flex-col sm:flex-row gap-5">
                 <button
                   onClick={() => onNavigate("drama", drama.id)}
-                  className={`shrink-0 w-24 h-36 rounded overflow-hidden bg-gradient-to-br ${drama.color} relative border border-white/5 cursor-pointer`}
+                  className="shrink-0 w-24 h-36 rounded overflow-hidden border border-white/5 cursor-pointer"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  {drama.image && drama.image.trim() !== "" ? (
+                    <img src={drama.image} alt={drama.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${drama.color} relative`}>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    </div>
+                  )}
                 </button>
                 <div className="flex-1 space-y-3">
                   <div>
