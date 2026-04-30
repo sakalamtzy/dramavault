@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
-import { Film, Tv, Clapperboard, Search } from "lucide-react";
+import { Film, Tv, Clapperboard, Search, User } from "lucide-react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Navbar from "./components/Navbar";
 import DramaCard from "./components/DramaCard";
 import DramaDetail from "./components/DramaDetail";
@@ -84,6 +85,18 @@ export default function App() {
       return inTitle || inCountry || inGenre || inCast;
     });
   }, [search, typeFilter]);
+
+  // Filtered cast (search by name or nationality)
+  const filteredCast = useMemo(() => {
+    const q = search.toLowerCase().trim();
+    if (!q) return [];
+    return castMembers.filter((c) => {
+      return (
+        c.name.toLowerCase().includes(q) ||
+        c.nationality.toLowerCase().includes(q)
+      );
+    });
+  }, [search]);
 
   // ─── WATCH PAGE ──────────────────────────────────
   if (view.page === "watch") {
@@ -206,21 +219,64 @@ export default function App() {
 
         {/* Count */}
         <p className="text-gray-600 text-xs mb-6">
-          {filtered.length} {filtered.length === 1 ? "title" : "titles"} found
+          {search
+            ? `${filteredCast.length} cast · ${filtered.length} titles found`
+            : `${filtered.length} titles`}
         </p>
 
-        {/* Grid */}
-        {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5">
-            {filtered.map((d) => (
-              <DramaCard
-                key={d.id}
-                drama={d}
-                onClick={() => openDrama(d.id)}
-              />
-            ))}
+        {/* Cast search results */}
+        {filteredCast.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-[#D4AF37] text-[11px] font-bold tracking-[0.15em] uppercase mb-4">
+              Cast Members
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {filteredCast.map((member) => {
+                const works = getCastWorks(member.id);
+                return (
+                  <button
+                    key={member.id}
+                    onClick={() => openCast(member.id)}
+                    className="group text-left w-full bg-[#0F0F0F] border border-white/5 rounded-md overflow-hidden hover:border-[#D4AF37]/25 transition-all cursor-pointer"
+                  >
+                    <div className="p-4 flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#C41E3A] to-[#1B2A4A] flex items-center justify-center border border-[#D4AF37]/20 mb-3">
+                        <User className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-white text-sm font-medium group-hover:text-[#D4AF37] transition-colors truncate w-full">
+                        {member.name}
+                      </h3>
+                      <p className="text-gray-500 text-[11px] mt-1">{member.nationality}</p>
+                      <p className="text-gray-600 text-[11px] mt-0.5">
+                        {works.length} {works.length === 1 ? "work" : "works"}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        ) : (
+        )}
+
+        {/* Drama Grid */}
+        {filtered.length > 0 ? (
+          <div>
+            {filteredCast.length > 0 && (
+              <h2 className="text-[#D4AF37] text-[11px] font-bold tracking-[0.15em] uppercase mb-4">
+                Titles
+              </h2>
+            )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5">
+              {filtered.map((d) => (
+                <DramaCard
+                  key={d.id}
+                  drama={d}
+                  onClick={() => openDrama(d.id)}
+                />
+              ))}
+            </div>
+          </div>
+        ) : filteredCast.length === 0 ? (
           <div className="text-center py-20">
             <div className="w-14 h-14 mx-auto mb-4 border border-[#D4AF37]/15 rounded-full flex items-center justify-center">
               <Search className="w-5 h-5 text-gray-600" />
@@ -239,7 +295,7 @@ export default function App() {
               Clear filters
             </button>
           </div>
-        )}
+        ) : null}
       </main>
 
       <Footer />
