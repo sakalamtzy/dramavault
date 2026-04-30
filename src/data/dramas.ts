@@ -41,14 +41,14 @@ export interface Drama {
 // Add your cast members here
 export const castMembers: CastMember[] = [
   // ────── COPY & PASTE THIS TEMPLATE ──────
-  // {
-  //   id: 1,
-  //   name: "Actor Name",
-  //   nationality: "South Korean",
-  //   birthdate: "Jan 1, 1990",
-  //   gender: "Male",
-  //   description: "Write a short biography about this person...",
-  // },
+  {
+    id: 1,
+    name: "Li Keyi",
+    nationality: "Chinese",
+    birthdate: "December 13, 2000",
+    gender: "Female",
+    description: "Write a short biography about this person...",
+  },
   // ─────────────────────────────────────────
 ];
 
