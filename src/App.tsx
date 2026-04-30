@@ -1,6 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
 import { Film, Tv, Clapperboard, Search, User } from "lucide-react";
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Navbar from "./components/Navbar";
 import DramaCard from "./components/DramaCard";
 import DramaDetail from "./components/DramaDetail";
@@ -68,7 +67,59 @@ export default function App() {
     [navigate]
   );
 
-  // Filtered dramas
+  // ─── SEARCH RESULTS (for navbar dropdown) ──────
+  const dropdownResults = useMemo(() => {
+    const q = search.toLowerCase().trim();
+    if (!q) return [];
+
+    const items: {
+      type: "drama" | "cast";
+      id: number;
+      title: string;
+      sub: string;
+      rating?: number;
+    }[] = [];
+
+    // Cast matches
+    castMembers.forEach((c) => {
+      if (
+        c.name.toLowerCase().includes(q) ||
+        c.nationality.toLowerCase().includes(q)
+      ) {
+        const works = getCastWorks(c.id);
+        items.push({
+          type: "cast",
+          id: c.id,
+          title: c.name,
+          sub: `${c.nationality} · ${works.length} works`,
+        });
+      }
+    });
+
+    // Drama matches
+    dramas.forEach((d) => {
+      const inTitle = d.title.toLowerCase().includes(q);
+      const inCountry = d.country.toLowerCase().includes(q);
+      const inGenre = d.genres.some((g) => g.toLowerCase().includes(q));
+      const inCast = d.castIds.some((cid) => {
+        const c = getCastById(cid);
+        return c ? c.name.toLowerCase().includes(q) : false;
+      });
+      if (inTitle || inCountry || inGenre || inCast) {
+        items.push({
+          type: "drama",
+          id: d.id,
+          title: d.title,
+          sub: `${d.type} · ${d.country} · ${d.year}`,
+          rating: d.rating,
+        });
+      }
+    });
+
+    return items.slice(0, 8); // max 8 results
+  }, [search]);
+
+  // ─── HOME PAGE: filtered dramas + cast ──────
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     return dramas.filter((d) => {
@@ -86,94 +137,95 @@ export default function App() {
     });
   }, [search, typeFilter]);
 
-  // Filtered cast (search by name or nationality)
   const filteredCast = useMemo(() => {
     const q = search.toLowerCase().trim();
     if (!q) return [];
-    return castMembers.filter((c) => {
-      return (
+    return castMembers.filter(
+      (c) =>
         c.name.toLowerCase().includes(q) ||
         c.nationality.toLowerCase().includes(q)
-      );
-    });
+    );
   }, [search]);
 
-  // ─── WATCH PAGE ──────────────────────────────────
+  // Shared navbar props
+  const navProps = {
+    search,
+    onSearch: setSearch,
+    onLogo: goHome,
+    onPickDrama: openDrama,
+    onPickCast: openCast,
+    results: dropdownResults,
+  };
+
+  // ─── LAYOUT WRAPPER ───────────────────────────
+  function layout(page: React.ReactNode) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
+        <Navbar {...navProps} />
+        <div className="flex-1">{page}</div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // ─── WATCH PAGE ──────────────────────────────
   if (view.page === "watch") {
     const drama = dramas.find((d) => d.id === view.id);
     if (!drama) return null;
     const cast = drama.castIds
       .map((cid) => getCastById(cid))
       .filter(Boolean) as typeof castMembers;
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
-        <Navbar search={search} onSearch={setSearch} onLogo={goHome} />
-        <div className="flex-1">
-          <WatchPage
-            drama={drama}
-            cast={cast}
-            startEpisode={view.episode}
-            onBack={goBack}
-            onCastClick={openCast}
-            onNavigate={(page, id) => {
-              if (page === "drama") openDrama(id);
-            }}
-          />
-        </div>
-        <Footer />
-      </div>
+    return layout(
+      <WatchPage
+        drama={drama}
+        cast={cast}
+        startEpisode={view.episode}
+        onBack={goBack}
+        onCastClick={openCast}
+        onNavigate={(page, id) => {
+          if (page === "drama") openDrama(id);
+        }}
+      />
     );
   }
 
-  // ─── CAST PAGE ───────────────────────────────────
+  // ─── CAST PAGE ───────────────────────────────
   if (view.page === "cast") {
     const person = getCastById(view.id);
     if (!person) return null;
     const works = getCastWorks(view.id);
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
-        <Navbar search={search} onSearch={setSearch} onLogo={goHome} />
-        <div className="flex-1">
-          <CastProfile
-            person={person}
-            works={works}
-            onBack={goBack}
-            onDramaClick={openDrama}
-          />
-        </div>
-        <Footer />
-      </div>
+    return layout(
+      <CastProfile
+        person={person}
+        works={works}
+        onBack={goBack}
+        onDramaClick={openDrama}
+      />
     );
   }
 
-  // ─── DRAMA DETAIL PAGE ───────────────────────────
+  // ─── DRAMA DETAIL PAGE ───────────────────────
   if (view.page === "drama") {
     const drama = dramas.find((d) => d.id === view.id);
     if (!drama) return null;
     const cast = drama.castIds
       .map((cid) => getCastById(cid))
       .filter(Boolean) as typeof castMembers;
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
-        <Navbar search={search} onSearch={setSearch} onLogo={goHome} />
-        <div className="flex-1">
-          <DramaDetail
-            drama={drama}
-            cast={cast}
-            onBack={goBack}
-            onCastClick={openCast}
-            onWatch={openWatch}
-          />
-        </div>
-        <Footer />
-      </div>
+    return layout(
+      <DramaDetail
+        drama={drama}
+        cast={cast}
+        onBack={goBack}
+        onCastClick={openCast}
+        onWatch={openWatch}
+      />
     );
   }
 
-  // ─── HOME PAGE ───────────────────────────────────
+  // ─── HOME PAGE ───────────────────────────────
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col">
-      <Navbar search={search} onSearch={setSearch} onLogo={goHome} />
+      <Navbar {...navProps} />
 
       <main className="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
         {/* Heading */}
