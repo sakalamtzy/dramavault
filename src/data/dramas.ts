@@ -56,29 +56,29 @@ export const castMembers: CastMember[] = [
 // Add your dramas, movies, TV series, short plays here
 export const dramas: Drama[] = [
   // ────── COPY & PASTE THIS TEMPLATE ──────
-  // {
-  //   id: 1,
-  //   title: "Drama Title",
-  //   type: "TV Series",            // "Movie" | "TV Series" | "Short Play"
-  //   year: 2024,
-  //   country: "South Korea",
-  //   genres: ["Romance", "Comedy"],
-  //   rating: 8.5,                  // 1.0 to 10.0
-  //   ratingCount: 12000,
-  //   synopsis: "Write your synopsis here...",
-  //   castIds: [],                  // e.g. [1, 2] to link to cast members
-  //   episodes: 16,
-  //   status: "Completed",          // "Completed" | "Airing"
-  //   color: "from-red-900 via-rose-800 to-red-950",
-  //   videoEpisodes: [
-  //     {
-  //       number: 1,
-  //       title: "Episode 1",
-  //       videoUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
-  //       duration: "1:05:30",
-  //     },
-  //   ],
-  // },
+  {
+    id: 1,
+    title: "Wrapped the Playboy Around My Finger",
+    type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
+    year: 2025,
+    country: "China",
+    genres: ["Romance", "Comedy"],
+    rating: 8.3,                  // 1.0 to 10.0
+    ratingCount: 12000,
+    synopsis: "In order to get her mother's company back, Shen Celadon transformed herself from a mysterious killer disguised as a weak and helpless young white flower! As agreed, she married Xi Xingye. At first glance, Xi Xingye was amazed by Shen Celadon's small white flower appearance. As they got along more and more, he fell deeper and deeper into the mysterious and powerful Shen Celadon",
+    castIds: [1],                  // e.g. [1, 2] to link to cast members
+    episodes: 69,
+    status: "Completed",          // "Completed" | "Airing"
+    color: "from-red-900 via-rose-800 to-red-950",
+    videoEpisodes: [
+    {
+      number: 1,
+      title: "Episode 1",
+      videoUrl: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+      duration: "1:05:30",
+    },
+  ],
+  },
   // ─────────────────────────────────────────
 ];
 
