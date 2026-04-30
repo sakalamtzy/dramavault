@@ -34,6 +34,7 @@ function SourceBadge({ type }: { type: VideoType }) {
     direct: { text: "Direct Video", cls: "bg-blue-900/60 text-blue-300 border-blue-500/30" },
     youtube: { text: "YouTube", cls: "bg-red-900/60 text-red-300 border-red-500/30" },
     vimeo: { text: "Vimeo", cls: "bg-cyan-900/60 text-cyan-300 border-cyan-500/30" },
+    rumble: { text: "Rumble", cls: "bg-green-900/60 text-green-300 border-green-500/30" },
     embed: { text: "Embed", cls: "bg-purple-900/60 text-purple-300 border-purple-500/30" },
   };
   const l = labels[type];
