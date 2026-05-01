@@ -48,8 +48,8 @@ export const castMembers: CastMember[] = [
     nationality: "Chinese",
     birthdate: "December 13, 2000",
     gender: "Female",
-    description: "Li Keyi, a Chinese actress. Born on December 13, 2000 in Luoyang, Henan, Sagittarius. Graduated from the Beijing Institute of Fashion Technology in China. She signed with Heard Island (听花岛) and officially began her vertical drama acting career.",
-    photo: "https://image.tmdb.org/t/p/original/jG9115Hmq6XwXDKbQeuQsrou41v.jpg", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
+    description: "Li Keyi, a Chinese actress. Born on December 13, 2000 in Luoyang, Henan, Sagittarius.",
+    photo: "https://gbaike-image.cdn.bcebos.com/622762d0f703918fa0eccdeb0161319759ee3d6d6ec7/622762d0f703918fa0eccdeb0161319759ee3d6d6ec7_url?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXJtYXJrL3dhdGVybWFyaw,t_60,g_7,xp_5,yp_2,P_20", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
   },
 ];
 
@@ -57,31 +57,31 @@ export const castMembers: CastMember[] = [
 // ⚠️ Add at least one drama with castIds: [1] so Li Keyi shows up!
 export const dramas: Drama[] = [
   // ────── COPY & PASTE THIS TEMPLATE ──────
-  {
-    id: 1,
-    title: "Wrapped the Playboy Around My Finger",
-    type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
-    year: 2025,
-    country: "China",
-    genres: ["Romance", "Comedy"],
-    rating: 8.3,                  // 1.0 to 10.0
-    ratingCount: 12000,
-    synopsis: "To reclaim her mother’s company, Shen Qing Ci transforms herself from a mysterious assassin into a seemingly aloof and innocent “white flower.” According to the agreement, she enters a flash marriage with Xi Xing Ye. At their first meeting, Xi Xing Ye is stunned by Shen Qing Ci’s delicate appearance, and as they spend more time together, he falls ever deeper for the mysterious and powerful woman behind the façade.",
-    castIds: [1],                  // e.g. [1, 2] to link to cast members
-    episodes: 69,
-    status: "Completed",          // "Completed" | "Airing"
-    color: "from-red-900 via-rose-800 to-red-950",
-    image: "https://image.tmdb.org/t/p/w1280/17M32lvVjkxf6SV5UWg0hepkCNc.jpg",                    // poster image URL
-    videoEpisodes: [
-    {
-      season: 1,       // season number
-      number: 1,       // episode number
-      title: "Full Episode",
-      videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
-      duration: "1:43:15",
-    },
-  ],
-  },
+   {
+     id: 1,
+     title: "Wrapped the Playboy Around My Finger",
+     type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
+     year: 2025,
+     country: "China",
+     genres: ["Romance", "Comedy"],
+     rating: 8.3,                  // 1.0 to 10.0
+     ratingCount: 12000,
+     synopsis: "To reclaim her mother’s company, Shen Qing Ci transforms herself from a mysterious assassin into a seemingly aloof and innocent “white flower.” According to the agreement, she enters a flash marriage with Xi Xing Ye. At their first meeting, Xi Xing Ye is stunned by Shen Qing Ci’s delicate appearance, and as they spend more time together, he falls ever deeper for the mysterious and powerful woman behind the façade.",
+     castIds: [1],                  // e.g. [1, 2] to link to cast members
+     episodes: 69,
+     status: "Completed",          // "Completed" | "Airing"
+     color: "from-red-900 via-rose-800 to-red-950",
+     image: "https://bkimg.cdn.bcebos.com/pic/bd315c6034a85edf8db187d2710f1e23dd54574edfb5?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080",                    // poster image URL
+     videoEpisodes: [
+       {
+         season: 1,       // season number
+         number: Full Episode,       // episode number
+         title: "Episode 1",
+         videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
+         duration: "1:43:15",
+       },
+     ],
+   },
   // ─────────────────────────────────────────
 ];
 
