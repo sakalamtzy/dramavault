@@ -66,7 +66,7 @@ export const dramas: Drama[] = [
      genres: ["Romance", "Comedy"],
      rating: 8.3,                  // 1.0 to 10.0
      ratingCount: 12000,
-     synopsis: "To reclaim her mother’s company, Shen Qing Ci transforms herself from a mysterious assassin into a seemingly aloof and innocent “white flower.” According to the agreement, she enters a flash marriage with Xi Xing Ye. At their first meeting, Xi Xing Ye is stunned by Shen Qing Ci’s delicate appearance, and as they spend more time together, he falls ever deeper for the mysterious and powerful woman behind the façade.",
+     synopsis: "Julie Lane, determined to take back her mother's company, sheds her identity as a mysterious assassin and slips into the guise of a fragile, icy little damsel. As promised, she dives into a flash marriage with the notorious No.1 rich playboy Colin Jenkins, kicking off her mission to tame her husband. At their first meeting, Colin is instantly captivated by Julie's delicate, untouchable beauty. But as they grow closer, he finds himself falling hopelessly for the dangerous, powerful woman hidden beneath the facade.",
      castIds: [1],                  // e.g. [1, 2] to link to cast members
      episodes: 69,
      status: "Completed",          // "Completed" | "Airing"
