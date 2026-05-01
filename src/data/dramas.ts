@@ -97,10 +97,11 @@ export function getCastWorks(castId: number): Drama[] {
     .sort((a, b) => b.year - a.year);
 }
 
-export type VideoType = "direct" | "youtube" | "vimeo" | "rumble" | "embed";
+export type VideoType = "direct" | "hls" | "youtube" | "vimeo" | "rumble" | "embed";
 
 export function detectVideoType(url: string): VideoType {
-  if (url.match(/\.(mp4|webm|ogg|m3u8)(\?|$)/i)) return "direct";
+  if (url.match(/\.m3u8(\?|$)/i)) return "hls";
+  if (url.match(/\.(mp4|webm|ogg)(\?|$)/i)) return "direct";
   if (url.includes("youtube.com") || url.includes("youtu.be")) return "youtube";
   if (url.includes("vimeo.com")) return "vimeo";
   if (url.includes("rumble.com")) return "rumble";
