@@ -49,7 +49,7 @@ export const castMembers: CastMember[] = [
     birthdate: "December 13, 2000",
     gender: "Female",
     description: "Li Keyi, a Chinese actress. Born on December 13, 2000 in Luoyang, Henan, Sagittarius.",
-    photo: "https://gbaike-image.cdn.bcebos.com/622762d0f703918fa0eccdeb0161319759ee3d6d6ec7/622762d0f703918fa0eccdeb0161319759ee3d6d6ec7_url?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXJtYXJrL3dhdGVybWFyaw,t_60,g_7,xp_5,yp_2,P_20", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
+    photo: "https://image.tmdb.org/t/p/original/jG9115Hmq6XwXDKbQeuQsrou41v.jpg", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
   },
 ];
 
@@ -71,7 +71,7 @@ export const dramas: Drama[] = [
      episodes: 69,
      status: "Completed",          // "Completed" | "Airing"
      color: "from-red-900 via-rose-800 to-red-950",
-     image: "https://bkimg.cdn.bcebos.com/pic/bd315c6034a85edf8db187d2710f1e23dd54574edfb5?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080",                    // poster image URL
+     image: "https://image.tmdb.org/t/p/w1280/17M32lvVjkxf6SV5UWg0hepkCNc.jpg",                    // poster image URL
      videoEpisodes: [
        {
          season: 1,       // season number
