@@ -5,7 +5,8 @@
 // ═══════════════════════════════════════════════════════════
 
 export interface VideoEpisode {
-  number: number;
+  season: number;     // season number, e.g. 1
+  number: number;     // episode number, e.g. 1
   title: string;
   videoUrl: string;
   duration: string;
@@ -73,16 +74,11 @@ export const dramas: Drama[] = [
     image: "https://image.tmdb.org/t/p/w1280/17M32lvVjkxf6SV5UWg0hepkCNc.jpg",                    // poster image URL
     videoEpisodes: [
     {
-      number: 1,
-      title: "Episode 1",
+      season: 1,       // season number
+      number: 1,       // episode number
+      title: "Full Episode",
       videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
       duration: "1:43:15",
-    },
-    {
-      number: 2,
-      title: "Episode 2",
-      videoUrl: "https://flickreels.dramafren.org/f94a367f-b53e-4c78-8fcf-1d9a7e5ff5df",
-      duration: "1:00:00",
     },
   ],
   },
