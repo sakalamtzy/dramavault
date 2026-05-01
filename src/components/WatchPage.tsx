@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   ArrowLeft,
   Play,
@@ -47,6 +47,15 @@ function SourceBadge({ type }: { type: VideoType }) {
   );
 }
 
+function formatTime(s: number): string {
+  if (!s || !isFinite(s)) return "0:00";
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = Math.floor(s % 60);
+  if (h > 0) return `${h}:${m.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+  return `${m}:${sec.toString().padStart(2, "0")}`;
+}
+
 export default function WatchPage({
   drama,
   cast,
@@ -58,8 +67,13 @@ export default function WatchPage({
   const [currentEp, setCurrentEp] = useState(startEpisode);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [buffered, setBuffered] = useState(0);
+  const [seeking, setSeeking] = useState(false);
   const videoElRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   const allEps = drama.videoEpisodes;
   const episode = allEps.find((e) => e.number === currentEp);
@@ -69,6 +83,9 @@ export default function WatchPage({
 
   const isNativeVideo = videoType === "direct" || videoType === "hls";
 
+  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const bufferedPercent = duration > 0 ? (buffered / duration) * 100 : 0;
+
   // Initialize HLS if needed
   useEffect(() => {
     if (!episode) return;
@@ -76,34 +93,23 @@ export default function WatchPage({
     const video = videoElRef.current;
     if (!video) return;
 
-    // Destroy previous instance
     if (hlsRef.current) {
       hlsRef.current.destroy();
       hlsRef.current = null;
     }
 
     if (Hls.isSupported()) {
-      const hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: true,
-      });
+      const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
       hls.loadSource(episode.videoUrl);
       hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        // Ready to play
-      });
       hls.on(Hls.Events.ERROR, (_event, data) => {
         if (data.fatal) {
-          if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
-            hls.startLoad();
-          } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
-            hls.recoverMediaError();
-          }
+          if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+          else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
         }
       });
       hlsRef.current = hls;
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      // Safari supports HLS natively
       video.src = episode.videoUrl;
     }
 
@@ -115,9 +121,47 @@ export default function WatchPage({
     };
   }, [episode, videoType]);
 
-  // Reset play state on episode change
+  // Track video time
+  useEffect(() => {
+    const video = videoElRef.current;
+    if (!video) return;
+
+    const onTimeUpdate = () => {
+      if (!seeking) setCurrentTime(video.currentTime);
+    };
+    const onDurationChange = () => setDuration(video.duration);
+    const onProgress = () => {
+      if (video.buffered.length > 0) {
+        setBuffered(video.buffered.end(video.buffered.length - 1));
+      }
+    };
+    const onPlay = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    const onEnded = () => setPlaying(false);
+
+    video.addEventListener("timeupdate", onTimeUpdate);
+    video.addEventListener("durationchange", onDurationChange);
+    video.addEventListener("progress", onProgress);
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
+    video.addEventListener("ended", onEnded);
+
+    return () => {
+      video.removeEventListener("timeupdate", onTimeUpdate);
+      video.removeEventListener("durationchange", onDurationChange);
+      video.removeEventListener("progress", onProgress);
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
+      video.removeEventListener("ended", onEnded);
+    };
+  }, [seeking, currentEp]);
+
+  // Reset on episode change
   useEffect(() => {
     setPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setBuffered(0);
   }, [currentEp]);
 
   const togglePlay = () => {
@@ -125,7 +169,6 @@ export default function WatchPage({
     if (!v) return;
     if (playing) v.pause();
     else v.play().catch(() => {});
-    setPlaying(!playing);
   };
 
   const toggleMute = () => {
@@ -153,6 +196,32 @@ export default function WatchPage({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Seek on click
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const bar = progressRef.current;
+    const video = videoElRef.current;
+    if (!bar || !video || !duration) return;
+    const rect = bar.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    const pct = x / rect.width;
+    video.currentTime = pct * duration;
+    setCurrentTime(pct * duration);
+  }, [duration]);
+
+  const handleSeekStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    setSeeking(true);
+    handleSeek(e);
+  }, [handleSeek]);
+
+  const handleSeekMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!seeking) return;
+    handleSeek(e);
+  }, [seeking, handleSeek]);
+
+  const handleSeekEnd = useCallback(() => {
+    setSeeking(false);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       {/* Top bar */}
@@ -178,7 +247,7 @@ export default function WatchPage({
           {/* ─── LEFT: Player + Info ─── */}
           <div className="space-y-6">
             {/* Video Player */}
-            <div className="relative bg-black rounded-md overflow-hidden aspect-video">
+            <div className="relative bg-black rounded-md overflow-hidden aspect-video select-none">
               {episode && isNativeVideo ? (
                 <div className="relative w-full h-full group">
                   <video
@@ -188,9 +257,6 @@ export default function WatchPage({
                     className="w-full h-full object-contain"
                     controls={false}
                     playsInline
-                    onPlay={() => setPlaying(true)}
-                    onPause={() => setPlaying(false)}
-                    onEnded={() => setPlaying(false)}
                     onClick={togglePlay}
                   />
 
@@ -204,10 +270,33 @@ export default function WatchPage({
                   )}
 
                   {/* Controls */}
-                  <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 pt-12 transition-opacity duration-200 ${playing ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}>
-                    <div className="w-full h-1 bg-gray-700 rounded-full mb-3">
-                      <div className="h-full w-0 bg-[#C41E3A] rounded-full" />
+                  <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 pt-16 transition-opacity duration-200 ${playing ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}>
+                    {/* Progress bar */}
+                    <div
+                      ref={progressRef}
+                      className="w-full h-1.5 hover:h-2.5 cursor-pointer rounded-full mb-3 bg-gray-700/50 relative transition-all group/bar"
+                      onMouseDown={handleSeekStart}
+                      onMouseMove={handleSeekMove}
+                      onMouseUp={handleSeekEnd}
+                      onMouseLeave={handleSeekEnd}
+                    >
+                      {/* Buffered */}
+                      <div
+                        className="absolute top-0 left-0 h-full bg-gray-500/50 rounded-full pointer-events-none"
+                        style={{ width: `${bufferedPercent}%` }}
+                      />
+                      {/* Progress */}
+                      <div
+                        className="absolute top-0 left-0 h-full bg-[#C41E3A] rounded-full pointer-events-none"
+                        style={{ width: `${progress}%` }}
+                      />
+                      {/* Dot */}
+                      <div
+                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-[#C41E3A] rounded-full shadow opacity-0 group-hover/bar:opacity-100 transition-opacity pointer-events-none"
+                        style={{ left: `${progress}%` }}
+                      />
                     </div>
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <button onClick={prevEp} className="text-white hover:text-[#D4AF37] transition-colors cursor-pointer"><SkipBack className="w-4 h-4" /></button>
@@ -218,7 +307,9 @@ export default function WatchPage({
                         <button onClick={toggleMute} className="text-white hover:text-[#D4AF37] transition-colors cursor-pointer">
                           {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                         </button>
-                        <span className="text-gray-300 text-xs ml-2">S{episode.season || 1} : E{episode.number} — {episode.duration}</span>
+                        <span className="text-gray-300 text-xs ml-1">
+                          {formatTime(currentTime)} / {formatTime(duration)}
+                        </span>
                       </div>
                       <div className="flex items-center gap-3">
                         <button className="text-gray-400 hover:text-white transition-colors cursor-pointer"><Settings className="w-4 h-4" /></button>
