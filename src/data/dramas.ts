@@ -77,8 +77,15 @@ export const dramas: Drama[] = [
          season: 1,       // season number
          number: 1,       // episode number
          title: "Full Episode",
-         videoUrl: "https://msacdn.hakunaymatata.com/flickReel/6117e9ca468f24b5d2fe5bd4b8256928.mp4?Expires=1778224643&Signature=RsfEo3A47Xuv~gt1fBWPo7bZjgLt54Ox9TE31yz3YYPcZM8JjG1pd7yLBSOmqyhQ23bLBBKzAiiQ7aPszxoC5TDuoph4lxMs181d7DcX2amhaEmKmgc-kZ8PQKv5JXr18b81fzI2xmzGOeeiBUejqPWBz-aotdnLjElK38JEMQQ4Epz7vNktGSFyjWuWE8mn7S~33RInB371Gy0mabhQNLLp2DdQbCjqUNTUSKVEmtRb2OG9Yz0e-MlZbC4D1hg9QVRnaH133qRk1EJME-iP6PZmtqPui3MSTRSb2WnAq4fRByJooAx8nEGeIOP-Xf5tgctaTL0kSO0ILpuncl3AdA__&Key-Pair-Id=KMHN1LQ1HEUPL", // "https://rumble.com/embed/v6vlomi/?pub=4",
-         duration: "1:43:15",
+         videoUrl: "https://msacdn.hakunaymatata.com/flickReel/6117e9ca468f24b5d2fe5bd4b8256928.mp4?Expires=1778224643&Signature=RsfEo3A47Xuv~gt1fBWPo7bZjgLt54Ox9TE31yz3YYPcZM8JjG1pd7yLBSOmqyhQ23bLBBKzAiiQ7aPszxoC5TDuoph4lxMs181d7DcX2amhaEmKmgc-kZ8PQKv5JXr18b81fzI2xmzGOeeiBUejqPWBz-aotdnLjElK38JEMQQ4Epz7vNktGSFyjWuWE8mn7S~33RInB371Gy0mabhQNLLp2DdQbCjqUNTUSKVEmtRb2OG9Yz0e-MlZbC4D1hg9QVRnaH133qRk1EJME-iP6PZmtqPui3MSTRSb2WnAq4fRByJooAx8nEGeIOP-Xf5tgctaTL0kSO0ILpuncl3AdA__&Key-Pair-Id=KMHN1LQ1HEUPL",
+         duration: "2:22",
+       },
+       {
+         season: 1,       // season number
+         number: 2,       // episode number
+         title: "Full Episode",
+         videoUrl: "https://msacdn.hakunaymatata.com/flickReel/660299142a541def75c26c073047f184.mp4?Expires=1778224643&Signature=pIYSfnhRa6QLGSOg56iuECv~UQn2kg3j1A~aMuDZCS2xvuFpMMwsuOwt~NqZworpIE~zoH51bWewhC~HG5ANB5BbkXaH648D1MXjxGddDJgUxaE4CfhQf3cYwmwzcR0-wkWwCysnOOLN19HJ3tEODBb8i7MJ~DKH1n4I1e~jPnASHBArzvFbykU75YvZmQPeeTx~x3kE5fQzVPb4mmHMIUjVYkNErG2eS11RPHJ44hlqjxS3~piSkVnHAUmuhQiKQOH0hbchbd2H7-rJtMtO~lTNFvJTIkE~h2HL2ZLNYenhRkvmnSdJJSBz-6WJxOw-YnAL3eNXDQz322r~e1wqtw__&Key-Pair-Id=KMHN1LQ1HEUPL",
+         duration: "2:21",
        },
      ],
    },
