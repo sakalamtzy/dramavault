@@ -76,9 +76,61 @@ export const dramas: Drama[] = [
        {
          season: 1,       // season number
          number: 1,       // episode number
-         title: "Episode 1",
+         title: "Full Episode",
          videoUrl: "https://rumble.com/embed/v6vlomi/?pub=4",
          duration: "1:43:15",
+       },
+     ],
+   },
+  // ─────────────────────────────────────────
+  {
+     id: 2,
+     title: "Wrapped the Playboy Around My Finger Season 2",
+     type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
+     year: 2025,
+     country: "China",
+     genres: ["Romance", "Comedy"],
+     rating: 8.0,                  // 1.0 to 10.0
+     ratingCount: 12000,
+     synopsis: "An enigmatic powerhouse enters a flash marriage with the most notorious playboy in the capital, determined to reclaim her late mother’s company. Within a year, the groom’s influential grandfather falls critically ill, plunging the prestigious family into turmoil.",
+     castIds: [1],                  // e.g. [1, 2] to link to cast members
+     episodes: 79,
+     status: "Completed",          // "Completed" | "Airing"
+     color: "from-red-900 via-rose-800 to-red-950",
+     image: "https://preview.redd.it/wrapped-the-playboy-around-my-finger-season-2-v0-mpbasidj213g1.jpeg?auto=webp&s=e242cffda40a9841a6ffed0f844e5164e32771f5",                    // poster image URL
+     videoEpisodes: [
+       {
+         season: 2,       // season number
+         number: 1,       // episode number
+         title: "Full Episode",
+         videoUrl: "https://embed.reely.live/embed?v=32dabeba-b2c6-484b-b199-4e2859546510",
+         duration: "2:26:36",
+       },
+     ],
+   },
+  // ─────────────────────────────────────────
+  {
+     id: 3,
+     title: "Snatching A Playboy Husband",
+     type: "Short Play",            // "Movie" | "TV Series" | "Short Play"
+     year: 2025,
+     country: "China",
+     genres: ["Romance", "Comedy"],
+     rating: 8.2,                  // 1.0 to 10.0
+     ratingCount: 12000,
+     synopsis: "In a twist of fate, she awakens on the very day of her wedding—only to find herself reborn into a life she once fled. The man who once dared to steal her heart in a reckless jest now stands before her once more: the infamous heir of the capital, a man known not for honor, but for his wild nights, gambling dens, and whispered scandals.",
+     castIds: [1],                  // e.g. [1, 2] to link to cast members
+     episodes: 79,
+     status: "Completed",          // "Completed" | "Airing"
+     color: "from-red-900 via-rose-800 to-red-950",
+     image: "https://zshipubcdn.farsunpteltd.com/playlet/1766741588_nfJ72pD7Pa.jpg?x-oss-process=image/resize,w_400,image/format,webp",                    // poster image URL
+     videoEpisodes: [
+       {
+         season: 3,       // season number
+         number: 1,       // episode number
+         title: "Full Episode",
+         videoUrl: "https://embed.reely.live/embed?v=003ad3dc-accd-48ba-a303-35f765699405",
+         duration: "2:26:36",
        },
      ],
    },
