@@ -48,7 +48,7 @@ export const castMembers: CastMember[] = [
     nationality: "Chinese",
     birthdate: "December 13, 2000",
     gender: "Female",
-    description: "Li Keyi, a Chinese actress. Born on December 13, 2000 in Luoyang, Henan, Sagittarius.",
+    description: "Li Keyi, a Chinese actress. Born on December 13, 2000 in Luoyang, Henan, Sagittarius. His representative works include "It Turns Out You've Always Loved Me Deeply", "The Pond That Comes Every Day", "The Night Is Gentle", etc.",
     photo: "https://image.tmdb.org/t/p/original/jG9115Hmq6XwXDKbQeuQsrou41v.jpg", // paste image URL here, e.g. "https://i.imgur.com/xxxxx.jpg"
   },
 ];
